@@ -1,0 +1,306 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>All-in-One Online Tools — Converters, Generators & Productivity</title>
+  <meta name="description" content="Free online tools: currency converter, QR generator, JSON formatter, Pomodoro timer and small client-side converters. Fast, accessible and SEO-friendly.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://maxpilot8693.github.io/all-in-one-tools/">  <!-- Open Graph / Twitter -->  <meta property="og:title" content="All-in-One Online Tools" />
+  <meta property="og:description" content="Converters, generators & productivity tools for everyday use." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://example.com/" />
+  <meta name="twitter:card" content="summary_large_image" />  <!-- Structured data -->  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "url":"https://example.com/",
+    "name":"All-in-One Online Tools",
+    "description":"Free online converters, generators and productivity tools."
+  }
+  </script>  <!-- Styles (single file for easy deploy) -->  <style>
+    /* Minimal reset */
+    :root{--primary:#667eea;--accent:#4facfe;--bg:#0f0f23;--card:rgba(255,255,255,0.04);--glass:rgba(255,255,255,0.08);--text:#fff;--muted:rgba(255,255,255,0.7)}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'SF Pro Display',sans-serif; margin:0; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased}
+    a{color:inherit}
+
+    header{position:relative; padding:2rem 1rem; text-align:center; background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent); border-bottom:1px solid rgba(255,255,255,0.04); backdrop-filter:blur(6px)}
+    .brand{font-weight:800; font-size:clamp(1.6rem,4vw,2.6rem); letter-spacing:-0.02em; background:linear-gradient(90deg,var(--primary),var(--accent)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent}
+    .subtitle{color:var(--muted); margin-top:.4rem}
+
+    .controls{position:absolute; right:1rem; top:1rem; display:flex; gap:.5rem; align-items:center}
+    #toggleMode{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,0.06); background:var(--glass); color:var(--text); cursor:pointer}
+
+    .container{max-width:1200px;margin:2rem auto;padding:0 1rem}
+
+    /* Search */
+    .search-container{max-width:640px;margin:1.5rem auto 2.5rem; position:relative}
+    #searchBar{width:100%;padding:14px 48px 14px 18px;border-radius:999px;border:1px solid rgba(255,255,255,0.06); background:rgba(255,255,255,0.02); color:var(--text); font-size:1rem}
+    .search-icon{position:absolute; right:14px; top:50%; transform:translateY(-50%); color:var(--muted)}
+
+    /* Dashboard grid */
+    #dashboard{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.4rem}
+    .tool-card{background:var(--card); padding:1.6rem; border-radius:14px; display:flex; flex-direction:column; gap:.6rem; min-height:160px; text-decoration:none; color:inherit; border:1px solid rgba(255,255,255,0.03); transition:transform .18s ease, box-shadow .18s ease}
+    .tool-card:focus,.tool-card:hover{transform:translateY(-6px); box-shadow:0 12px 30px rgba(0,0,0,0.45)}
+    .tool-icon{font-size:1.8rem}
+    .tool-title{font-weight:700; font-size:1.05rem}
+    .tool-desc{color:var(--muted); font-size:.95rem}
+    .feature-tag{display:inline-block; padding:.25rem .6rem; border-radius:999px; font-size:.78rem; background:rgba(255,255,255,0.03); color:var(--muted); margin-top:auto}
+
+    /* Tool panels */
+    .tool{display:none; margin:2rem auto; max-width:900px; background:var(--card); padding:2rem; border-radius:16px; border:1px solid rgba(255,255,255,0.04)}
+    .tool.active{display:block}
+    .tool h2{margin-top:0; font-size:1.6rem}
+    .row{display:flex; gap:1rem}
+    .col{flex:1}
+    label{display:block; font-size:.9rem; color:var(--muted); margin-bottom:.4rem}
+    input,select,textarea{width:100%; padding:12px 14px; border-radius:10px; border:1px solid rgba(255,255,255,0.04); background:rgba(0,0,0,0.18); color:var(--text)}
+    button.btn{padding:10px 16px; border-radius:12px; border:none; cursor:pointer; background:linear-gradient(90deg,var(--primary),var(--accent)); color:#fff}
+    .small{font-size:.9rem}
+
+    /* JSON output */
+    pre.json-output{background:rgba(0,0,0,0.25); padding:14px; border-radius:10px; overflow:auto; max-height:420px}
+
+    /* Pomodoro */
+    .timer{font-size:3rem; text-align:center; margin:1rem 0}
+    .timer-controls{display:flex; gap:.6rem; justify-content:center}
+
+    /* QR */
+    .qr-preview{display:flex; gap:1rem; align-items:center}
+    .qr-preview img{border-radius:10px; box-shadow:0 8px 24px rgba(0,0,0,0.5)}
+
+    footer{margin:3rem 0 4rem; text-align:center; color:var(--muted)}
+
+    /* Light mode (overrides) */
+    body.light{--bg:#f7f9fc; --card:#ffffff; --glass:rgba(0,0,0,0.04); --text:#0b1220; --muted:rgba(11,18,32,0.6)}
+    body.light header{background:linear-gradient(180deg, rgba(0,0,0,0.02), transparent)}
+
+    @media(max-width:720px){.row{flex-direction:column}}
+  </style></head>
+<body>
+  <header>
+    <div class="controls">
+      <button id="toggleMode" aria-label="Toggle light and dark mode">🌙</button>
+    </div>
+    <div class="brand">All-in-One Online Tools</div>
+    <div class="subtitle">Converters, generators & productivity — lightweight, privacy-first</div>
+  </header>  <main class="container" id="main">
+    <section class="search-container" aria-label="Search tools">
+      <input id="searchBar" type="search" placeholder="Search a tool (e.g. QR, JSON, Pomodoro)..." aria-label="Search tools">
+      <span class="search-icon">🔍</span>
+    </section><!-- Dashboard -->
+<section id="dashboard" aria-label="Available tools">
+  <a href="#" class="tool-card" data-tool="currency" role="button">
+    <div class="tool-icon">💱</div>
+    <div class="tool-title">Currency Converter</div>
+    <div class="tool-desc">Live rates (no API key required). Convert between major currencies.</div>
+    <div class="feature-tag">Live rates</div>
+  </a>
+
+  <a href="#" class="tool-card" data-tool="file" role="button">
+    <div class="tool-icon">📂</div>
+    <div class="tool-title">File Converter (client-side)</div>
+    <div class="tool-desc">Convert images to PNG/JPEG and download. Small client-only conversions.</div>
+    <div class="feature-tag">Client-only</div>
+  </a>
+
+  <a href="#" class="tool-card" data-tool="qr" role="button">
+    <div class="tool-icon">🔳</div>
+    <div class="tool-title">QR Code Generator</div>
+    <div class="tool-desc">Create QR codes for URLs or text. Save image.</div>
+    <div class="feature-tag">PNG export</div>
+  </a>
+
+  <a href="#" class="tool-card" data-tool="json" role="button">
+    <div class="tool-icon">🧩</div>
+    <div class="tool-title">JSON Formatter & Validator</div>
+    <div class="tool-desc">Beautify, minify and validate JSON in your browser.</div>
+    <div class="feature-tag">Safe</div>
+  </a>
+
+  <a href="#" class="tool-card" data-tool="pomodoro" role="button">
+    <div class="tool-icon">⏱️</div>
+    <div class="tool-title">Pomodoro Timer</div>
+    <div class="tool-desc">Focus timer with start/pause/reset and sound.</div>
+    <div class="feature-tag">Focus</div>
+  </a>
+</section>
+
+<!-- Tool Panels -->
+<section id="currency" class="tool" aria-hidden="true">
+  <h2>Currency Converter</h2>
+  <p class="small">Rates provided by a free public API. Works without API key.</p>
+  <div class="row">
+    <div class="col">
+      <label for="amount">Amount</label>
+      <input id="amount" type="number" value="1" min="0" step="any">
+    </div>
+    <div class="col">
+      <label for="from">From</label>
+      <select id="from"></select>
+    </div>
+    <div class="col">
+      <label for="to">To</label>
+      <select id="to"></select>
+    </div>
+  </div>
+  <div style="margin-top:1rem"><button id="convertBtn" class="btn">Convert</button></div>
+  <div id="rateResult" style="margin-top:1rem; font-weight:700"></div>
+  <div id="rateInfo" class="small" style="color:var(--muted); margin-top:.5rem"></div>
+</section>
+
+<section id="file" class="tool" aria-hidden="true">
+  <h2>File Converter (client-side)</h2>
+  <label for="fileInput">Choose an image (JPG/PNG/WebP)</label>
+  <input id="fileInput" type="file" accept="image/*">
+  <label for="format">Target format</label>
+  <select id="format"><option value="image/png">PNG</option><option value="image/jpeg">JPEG</option></select>
+  <div style="margin-top:1rem"><button id="convertFileBtn" class="btn">Convert & Download</button></div>
+  <div id="fileStatus" class="small" style="margin-top:.6rem;color:var(--muted)"></div>
+</section>
+
+<section id="qr" class="tool" aria-hidden="true">
+  <h2>QR Code Generator</h2>
+  <label for="qrText">URL or text</label>
+  <input id="qrText" type="text" placeholder="https://example.com">
+  <div style="margin-top:.6rem"><button id="makeQR" class="btn">Generate QR</button></div>
+  <div class="qr-preview" style="margin-top:1rem">
+    <img id="qrImage" alt="Generated QR code" src="" width="160" height="160" style="display:none">
+    <div id="qrActions" style="display:none"><button id="downloadQR" class="btn">Download PNG</button></div>
+  </div>
+</section>
+
+<section id="json" class="tool" aria-hidden="true">
+  <h2>JSON Formatter & Validator</h2>
+  <label for="jsonInput">Paste JSON</label>
+  <textarea id="jsonInput" placeholder='{"hello": "world"}'></textarea>
+  <div style="display:flex; gap:.6rem; margin-top:.5rem"><button id="beautify" class="btn">Beautify</button><button id="minify" class="btn">Minify</button><button id="validate" class="btn">Validate</button></div>
+  <pre id="jsonOutput" class="json-output" aria-live="polite"></pre>
+</section>
+
+<section id="pomodoro" class="tool" aria-hidden="true">
+  <h2>Pomodoro Timer</h2>
+  <div style="display:flex; gap:1rem; max-width:520px">
+    <div class="col"><label for="workM">Work (minutes)</label><input id="workM" type="number" value="25" min="1"></div>
+    <div class="col"><label for="breakM">Break (minutes)</label><input id="breakM" type="number" value="5" min="1"></div>
+  </div>
+  <div class="timer" id="timerDisplay">25:00</div>
+  <div class="timer-controls"><button id="startTimer" class="btn">Start</button><button id="pauseTimer" class="btn">Pause</button><button id="resetTimer" class="btn">Reset</button></div>
+</section>
+
+<footer>
+  <p>© 2025 All-in-One Tools — Built with privacy-first, minimal dependencies.</p>
+  <nav aria-label="Footer links"><a href="/about.html">About</a> · <a href="/privacy.html">Privacy</a> · <a href="/contact.html">Contact</a></nav>
+</footer>
+
+  </main>  <!-- Scripts: functionality & progressive enhancement -->  <script>
+    // Utility: select elements
+    const $ = s => document.querySelector(s);
+    const $$ = s => Array.from(document.querySelectorAll(s));
+
+    // Theme toggle (persist)
+    const toggle = $('#toggleMode');
+    function applyTheme(isLight){ document.body.classList.toggle('light', !!isLight); toggle.textContent = isLight ? '☀️' : '🌙'; }
+    toggle.addEventListener('click', ()=>{ const now = !document.body.classList.contains('light'); localStorage.setItem('aio-light', now); applyTheme(now); });
+    applyTheme(localStorage.getItem('aio-light') === 'true');
+
+    // Dashboard: open tool panels
+    $$('#dashboard .tool-card').forEach(card => card.addEventListener('click', (e)=>{
+      const tool = card.dataset.tool; openTool(tool);
+    }));
+
+    function openTool(name){ // hide all
+      $$('.tool').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-hidden','true'); });
+      const panel = document.getElementById(name);
+      if(panel){ panel.classList.add('active'); panel.setAttribute('aria-hidden','false'); panel.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+
+    // Search filter
+    $('#searchBar').addEventListener('input', function(){ const q = this.value.trim().toLowerCase(); $$('#dashboard .tool-card').forEach(c=>{ const title = c.querySelector('.tool-title').textContent.toLowerCase(); c.style.display = title.includes(q) ? '' : 'none'; }); });
+
+    /* ---------------- Currency converter ---------------- */
+    const API = 'https://api.exchangerate.host/latest'; // free, no-key API
+    const fromSel = $('#from'), toSel = $('#to'), amountEl = $('#amount'), convertBtn = $('#convertBtn'), rateResult = $('#rateResult'), rateInfo = $('#rateInfo');
+
+    async function fetchSymbols(){
+      try{
+        const res = await fetch('https://api.exchangerate.host/symbols');
+        const json = await res.json();
+        const symbols = Object.keys(json.symbols);
+        symbols.sort();
+        for(const s of symbols){ fromSel.insertAdjacentHTML('beforeend', `<option value="${s}">${s}</option>`); toSel.insertAdjacentHTML('beforeend', `<option value="${s}">${s}</option>`); }
+        fromSel.value = 'USD'; toSel.value = 'EUR';
+      }catch(e){ console.warn('Could not load symbols', e); fromSel.innerHTML = '<option>USD</option><option>EUR</option>'; toSel.innerHTML = '<option>EUR</option><option>USD</option>'; }
+    }
+    fetchSymbols();
+
+    convertBtn.addEventListener('click', async ()=>{
+      const a = parseFloat(amountEl.value) || 0; const from = fromSel.value; const to = toSel.value;
+      rateResult.textContent = 'Loading...'; rateInfo.textContent = '';
+      try{
+        const res = await fetch(API + `?base=${encodeURIComponent(from)}&symbols=${encodeURIComponent(to)}`);
+        const j = await res.json();
+        if(j && j.rates && j.rates[to]){
+          const rate = j.rates[to]; const converted = (a * rate).toLocaleString(undefined, {maximumFractionDigits:6});
+          rateResult.textContent = `${a} ${from} ≈ ${converted} ${to}`;
+          rateInfo.textContent = `1 ${from} = ${rate} ${to} — rates: ${j.date}`;
+        }else{ rateResult.textContent = 'Conversion failed'; }
+      }catch(err){ rateResult.textContent = 'Network error — try again'; console.error(err); }
+    });
+
+    /* ---------------- File converter (image) ---------------- */
+    const fileInput = $('#fileInput'), convertFileBtn = $('#convertFileBtn'), formatSel = $('#format'), fileStatus = $('#fileStatus');
+    convertFileBtn.addEventListener('click', ()=>{
+      const f = fileInput.files && fileInput.files[0]; if(!f){ fileStatus.textContent = 'Please choose an image file first.'; return; }
+      const reader = new FileReader(); reader.onload = function(ev){ const img = new Image(); img.onload = function(){ const canvas = document.createElement('canvas'); canvas.width = img.width; canvas.height = img.height; const ctx = canvas.getContext('2d'); ctx.drawImage(img,0,0);
+            const mime = formatSel.value; canvas.toBlob(function(blob){ const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'converted.' + (mime.split('/')[1] || 'png'); document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); fileStatus.textContent = 'Download started.'; }, mime, 0.92);
+      }; img.src = ev.target.result; }; reader.readAsDataURL(f);
+    });
+
+    /* ---------------- QR generator (uses api.qrserver) ---------------- */
+    const makeQR = $('#makeQR'), qrText = $('#qrText'), qrImage = $('#qrImage'), qrActions = $('#qrActions'), downloadQR = $('#downloadQR');
+    makeQR.addEventListener('click', ()=>{
+      const val = qrText.value.trim(); if(!val){ alert('Enter text or URL to encode'); return; }
+      const size = 320; const src = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(val)}`;
+      qrImage.src = src; qrImage.style.display = ''; qrActions.style.display = '';
+    });
+    downloadQR.addEventListener('click', ()=>{
+      if(!qrImage.src) return; const a = document.createElement('a'); a.href = qrImage.src; a.download = 'qr.png'; document.body.appendChild(a); a.click(); a.remove(); });
+
+    /* ---------------- JSON formatter/validator ---------------- */
+    const jsonInput = $('#jsonInput'), beautify = $('#beautify'), minify = $('#minify'), validate = $('#validate'), jsonOutput = $('#jsonOutput');
+    beautify.addEventListener('click', ()=>{ try{ const obj = JSON.parse(jsonInput.value); jsonOutput.textContent = JSON.stringify(obj, null, 2); }catch(e){ jsonOutput.textContent = 'Invalid JSON — ' + e.message; } });
+    minify.addEventListener('click', ()=>{ try{ const obj = JSON.parse(jsonInput.value); jsonOutput.textContent = JSON.stringify(obj); }catch(e){ jsonOutput.textContent = 'Invalid JSON — ' + e.message; } });
+    validate.addEventListener('click', ()=>{ try{ JSON.parse(jsonInput.value); jsonOutput.textContent = '✅ Valid JSON'; }catch(e){ jsonOutput.textContent = '❌ Invalid JSON — ' + e.message; } });
+
+    /* ---------------- Pomodoro timer ---------------- */
+    let timerInterval=null, remaining=0, mode='work'; const timerDisplay = $('#timerDisplay'), startTimer = $('#startTimer'), pauseTimer = $('#pauseTimer'), resetTimer = $('#resetTimer');
+    function updateTimerDisplay(ms){ const s = Math.ceil(ms/1000); const mm = String(Math.floor(s/60)).padStart(2,'0'); const ss = String(s%60).padStart(2,'0'); timerDisplay.textContent = `${mm}:${ss}`; }
+    function startCountdown(){ if(timerInterval) return; const work = parseInt($('#workM').value,10)||25; const br = parseInt($('#breakM').value,10)||5; remaining = (mode==='work'? work*60 : br*60) *1000; updateTimerDisplay(remaining); const start = Date.now(); timerInterval = setInterval(()=>{ const elapsed = Date.now() - start; const left = remaining - elapsed; if(left<=0){ clearInterval(timerInterval); timerInterval=null; // toggle mode
+            mode = mode==='work' ? 'break' : 'work'; // auto-start next period
+            const next = mode==='work' ? (parseInt($('#workM').value,10)||25) : (parseInt($('#breakM').value,10)||5);
+            remaining = next*60*1000; updateTimerDisplay(remaining); // brief beep
+            try{ new Audio(0).play().catch(()=>{}); }catch(e){}
+            // optional: auto-start next
+            startCountdown(); }
+        else updateTimerDisplay(left);
+        }, 250);
+    }
+    startTimer.addEventListener('click', startCountdown);
+    pauseTimer.addEventListener('click', ()=>{ if(timerInterval){ clearInterval(timerInterval); timerInterval=null; } });
+    resetTimer.addEventListener('click', ()=>{ if(timerInterval){ clearInterval(timerInterval); timerInterval=null; } mode='work'; updateTimerDisplay((parseInt($('#workM').value,10)||25)*60*1000); });
+    // initialize display
+    updateTimerDisplay((parseInt($('#workM').value,10)||25)*60*1000);
+
+    /* ---------------- Keyboard accessibility ---------------- */
+    document.addEventListener('keydown', (e)=>{
+      if(e.key==='Escape'){ $$('.tool').forEach(t=>t.classList.remove('active')); }
+    });
+
+    /* ---------------- Small helpful fallback for no-js users ---------------- */
+    // (No JS: content visible remains the dashboard only; tools require JS)
+  </script></body>
+</html>
